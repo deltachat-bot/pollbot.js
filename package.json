@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/karissa/deltachat-polls#readme",
   "dependencies": {
-    "deltachat-node": "^0.43.0",
+    "deltachat-node": "^0.40.2",
     "pollbot.js": "^1.0.0"
   }
 }

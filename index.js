@@ -12,28 +12,36 @@ var cwd = args[2] || process.cwd()
 var locale = 'en'
 var bot = new Pollbot(locale)
 
-function maybeReply (msgId) {
+function maybeReply (chatId, msgId) {
   var msg = dc.getMessage(msgId)
-  var fromId = dc.getFromId(msg)
+  console.log('got msg', msgId)
+  if (!msg) return
+  console.log(msg.getState())
+  console.log(msg.getState().isSeen())
+  if (msg.getState().isSeen()) return
+  var fromId = msg.getFromId()
+  console.log('fromId', fromId)
   if (fromId !== C.DC_CONTACT_ID_SELF) {
     var text = msg.getText()
+    console.log('got text', text)
     var response = bot.getResponse(text)
+    console.log('got response', response)
     if (response) {
-      var chatId = dc.createChatByMessageId(msgId)
+      console.log('sending message', chatId, response)
+      chatId = dc.createChatByMessageId(msgId)
       dc.sendMessage(chatId, response)
+      dc.markSeenMessages(msgId)
     }
   }
-
-  dc.markSeenMessages(msgId)
 }
 
 var dc = new DeltaChat()
-dc.configure({ addr, mailPw })
+console.log('opening..')
 dc.open(cwd, function (err) {
   if (err) throw err
-
-  var listening = ['DC_EVENT_MSGS_CHANGED', 'DC_EVENT_INCOMING_MSG']
-  dc.on(listening[0], maybeReply)
-  dc.on(listening[1], maybeReply)
+  console.log('opened!')
+  dc.configure({ addr, mailPw })
+  dc.on('ALL', console.log)
+  dc.on('DC_EVENT_INCOMING_MSG', maybeReply)
+  dc.on('DC_EVENT_MESSAGE_CHANGED', maybeReply)
 })
-
