@@ -21,8 +21,8 @@ high priority:
 nice to have:
 
 - [ ] support looking at backscroll of fresh messages in the case the bot went down 
-- [ ] welcome message on connect, something like 'I am ready to make polls!'
-- [ ] save polls to disk in case bot went down
+- [ ] welcome message on connect, something like 'I am ready to make polls!' 
+- [ ] save current poll and language to disk in case bot went down
 - [ ] add support to pass in a config file for advanced connection options
 
 
