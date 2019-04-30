@@ -2,6 +2,7 @@ var DeltaChat = require('deltachat-node')
 var Pollbot = require('pollbot.js')
 var C = require('deltachat-node/constants')
 
+var bots = {}
 var args = process.argv.splice(2)
 
 var addr = args[0]
@@ -10,9 +11,8 @@ var cwd = args[2] || process.cwd()
 
 // TODO: support more locales in pollbot.js
 var locale = 'en'
-var bot = new Pollbot(locale)
-
 function maybeReply (chatId, msgId) {
+  var bot = bots[chatId] || new Pollbot(locale)
   var msg = dc.getMessage(msgId)
   console.log('got msg', msgId)
   if (!msg) return
@@ -30,9 +30,9 @@ function maybeReply (chatId, msgId) {
       console.log('sending message', chatId, response)
       chatId = dc.createChatByMessageId(msgId)
       dc.sendMessage(chatId, response)
-      dc.markSeenMessages(msgId)
     }
   }
+  dc.markSeenMessages(msgId)
 }
 
 var dc = new DeltaChat()
