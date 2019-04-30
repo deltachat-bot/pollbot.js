@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var DeltaChat = require('deltachat-node')
 var Pollbot = require('pollbot.js')
 var C = require('deltachat-node/constants')

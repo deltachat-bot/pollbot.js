@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "pollbot for deltachat",
   "main": "index.js",
+  "bin": "index.js",
   "scripts": {
     "test": "node test.js"
   },
