@@ -13,6 +13,7 @@ $ deltachat-pollbot addr mail_pw
 
 high priority: 
 
+- [ ] does it properly handle contact requests? 
 - [ ] translation of messages in [pollbot.js](karissa/pollbot.js)
 - [ ] set a different language by sending message to chat `poll lang de`
 - [ ] get a deltachat email for this bot
