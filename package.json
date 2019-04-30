@@ -1,6 +1,6 @@
 {
   "name": "deltachat-polls",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "pollbot for deltachat",
   "main": "index.js",
   "bin": "index.js",
